@@ -16,6 +16,9 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { fireDb } from "./firebase";
 import BubbleChart from "./BubbleChart";
 import Polls from "./Poll";
+import AudioPlayer from 'shared/js/AudioPlayer';
+import { PillBox, TweetList } from "./components";
+import {CircleBg} from "./Icons";
 
 let dispatch;
 
@@ -183,27 +186,40 @@ const Main = () => {
     )
 
     const mgrid = () => {
-        const data = store.sheets[`theme_${UI.view}`];
+        const data = content.themes[UI.view];
 
         return (
         <section className="content-main">
             <div className="mgrid">
                 <div className="col">
-                    <div className="title">{UI.view}</div>
-                    <div className="heading" dangerouslySetInnerHTML={setHtml(data.heading)}></div>
-                </div>
-                <div className="col">
-                    <Polls data={content.polls}/>
-                    <div className="audio desc">
-                        <h2>Listen</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero veniam ea voluptatum?</p>
+                    <div className="title">
+                        <CircleBg className="bg" />
+                        <div className="abs">
+                            <h2>{data.label}</h2>
+                        </div>
                     </div>
-                    <div className="pill">Audio</div>
+                    <div className="heading">
+                        <h3 dangerouslySetInnerHTML={setHtml(data.heading)} />
+                    </div>
+                    <div className="body" dangerouslySetInnerHTML={setHtml(data.body)}></div>
                 </div>
                 <div className="col">
-                    <div className="pill"></div>
-                    <div className="pill"></div>
-                    <div className="pill"></div>
+                    <h3>{content.themePollTitle}</h3>
+                    <Polls data={content.polls}/>
+                    <div className="audio-desc">
+                        <div className="col">
+                            <h4>{content.themeAudioTitle}</h4>
+                            <p dangerouslySetInnerHTML={setHtml(data.audioInfo)} />
+                        </div>
+                        <img src={`${assetsPath}/${data.audioImage}`} alt="" />
+                    </div>
+                    <PillBox>
+                        <AudioPlayer src={`${assetsPath}/${data.audio}.mp3`} />
+                    </PillBox>
+                </div>
+                <div className="col">
+                    <h3>{content.themeTwitterTitle}</h3>
+                    <TweetList data={data.tweets} />
                 </div>
             </div>
         </section>

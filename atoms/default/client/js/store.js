@@ -42,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
             });
 
             content['polls'] = [];
-            action.payload.poll.forEach(v => {
+            action.payload.polls.forEach(v => {
                 const props = {...v};
                 for (let p in props) {
 
@@ -52,11 +52,22 @@ const rootReducer = (state = initialState, action) => {
                 }
                 content.polls[v.id] = props;
             })
-            // content['questions'] = {};
-            // action.payload.questions.forEach(v => {
-            //     content.questions[v.panel] = v;
-            // })
-            
+            content['themes'] = {};
+            action.payload.themes.forEach(v => {
+                content.themes[v.key] = v;
+                content.themes[v.key].tweets = [];
+                if (action.payload?.[`theme_${v.key}`]) {
+                    action.payload?.[`theme_${v.key}`].forEach(h => {
+                    content.themes[v.key][h.key] = h.content                   
+                    })
+                }
+            })
+
+            action.payload.tweets.forEach(v => {
+                content.themes[v.key].tweets.push(v);
+            })
+
+            console.log(content);
             return {...state, sheets: action.payload, content: content };
             // return {...state, sheets: action.payload };
 

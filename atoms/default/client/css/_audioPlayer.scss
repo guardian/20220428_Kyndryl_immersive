@@ -71,7 +71,7 @@
         outline: none;
         
         svg {
-            fill: #1d1d1d;
+            fill: var(--bgHilight, #1d1d1d);
             height: 40px;
             width: 40px;
         }
@@ -83,7 +83,7 @@
 
             }
             .st1 {
-                fill: white;
+                fill: #000000;
             }
         }
     }
@@ -114,8 +114,11 @@
         height: 40px;
     }
 
+    // .st0 {
+    //     fill: var(--bgHilight, #000);
+    // }
     .st1 {
-        fill: white;
+        fill:var(--bgHilight, white);
     }
 
     .subs {
@@ -152,7 +155,7 @@
             width: 100%;
             margin: auto;
             .current {
-                background-color: #000000;
+                background-color: var(--bgHilight, #000000);
                 height: 100%;
                 transition: width 500ms ease;
                 will-change: width;

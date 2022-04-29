@@ -495,3 +495,12 @@ export const IconStart = () => {
 </i>
 	)
 }
+
+
+export const CircleBg = () => {
+    return (
+        <svg width="284px" height="284px" viewBox="0 0 284 284" version="1.1" >
+  <path class="hl-color" d="M132 264C204.902 264 264 204.902 264 132C264 59.0984 204.902 0 132 0C59.0984 0 0 59.0984 0 132C0 204.902 59.0984 264 132 264Z" transform="translate(10 10)" fill-rule="evenodd" strokeWidth="3" strokeLinecap="round" strokeDasharray="0 10" />
+</svg>        
+    )
+}

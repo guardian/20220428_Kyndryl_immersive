@@ -109,9 +109,9 @@ const Poll = ({id,docid,options,question, visible, active}) => {
     });
 
     return (
-        <PillBox>
+        <PillBox className="poll">
             <form onSubmit={handleSubmit}>
-                <h3>{question}</h3>
+                <h4>{question}</h4>
                 {/* <h3>User: {userId}</h3> */}
                 { pollDone === null && <p>loading...</p>}
                 { pollDone == false && ops}
