@@ -14,6 +14,10 @@ body {
   // color: #fff;
 }
 
+* {
+  transition: all .2s ease;
+}
+
 #Live {
   margin-top: 5vh;
 }
@@ -254,6 +258,13 @@ section.footer {
   background: var(--bgColor);
   color: white;
 }
+.btn {
+  &.primary {
+    background-color: var(--bgHilight);
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+  }
+}
 .pillbox {
     background-color: var(--pillboxBg, #fff);
     border-radius: 25px;
@@ -280,10 +291,16 @@ section.footer {
       position: relative;
       display: flex;
       justify-content: center;
+      @keyframes rotateIt {
+        50% {transform: rotate(180deg);}
+        100% {transform: rotate(359deg);}
+      }
       svg {
         stroke: var(--bgHilight);
         fill: none;
+        animation: rotateIt infinite 20s linear reverse;
       }
+
       .abs {
         position: absolute;
         top: 0;
@@ -351,7 +368,7 @@ section.footer {
       transform-origin: 0;
       // transform: scaleX(0.005);
       background-color: var(--bgHilight);
-      transition: width 1s ease-in-out;
+      transition: all 0.3s ease, width 1s ease-in-out;
       // margin: .5rem 0.5rem 0 0;
       color: white;
       border-radius: 0 10px 10px 0;
@@ -375,6 +392,21 @@ section.footer {
     }
     p {
       margin: 0 0 0 1rem;
+    }
+  }
+
+  .tweet-list {
+    .btn-prev, .btn-next {
+      float: right;
+      margin-right: 1rem;      
+    }
+    .btn-prev {
+      margin-top: -1.8rem;
+    }
+    .btn-next {
+      svg {
+        transform: rotate(180deg);
+      }
     }
   }
   .related-items {

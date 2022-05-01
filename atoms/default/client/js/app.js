@@ -190,6 +190,7 @@ const Main = () => {
 
         return (
         <section className="content-main">
+            <BubbleChart />
             <div className="mgrid">
                 <div className="col">
                     <div className="title">
@@ -263,6 +264,7 @@ const Main = () => {
                 {!loaded && <Loading />}
                 {/* {loaded && home()} */}
                 {/* {loaded && chart()} */}
+                
                 {loaded && mgrid()}
                 {/* {loaded && <Polls data={content.polls}/>} */}
             </Transition>            

@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@amcharts/amcharts5": "^5.1.14",
+    "@amcharts/amcharts5": "^5.2.0",
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/preset-env": "^7.6.3",
@@ -40,6 +40,7 @@
     "postcss": "^8.2.9",
     "preact": "^10.0.4",
     "preact-social": "^1.0.6",
+    "react-elastic-carousel": "^0.11.5",
     "react-redux": "^7.2.3",
     "react-smooth-scrolling": "^1.0.2",
     "react-transition-group": "^4.4.2",
@@ -64,6 +65,7 @@
     "gulp-replace": "^1.0.0",
     "mkdirp": "^0.5.1",
     "request-promise": "^4.2.5",
+    "styled-components": "^5.3.5",
     "terser-webpack-plugin": "^4.2.2",
     "uglifyjs-webpack-plugin": "^2.2.0"
   }
