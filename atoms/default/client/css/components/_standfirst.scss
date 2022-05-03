@@ -2,15 +2,29 @@
 $stand-first-color: var(--brand-primary);
 .standfirst {
     display: flex;
-    justify-content: center;
+    @include mq(tablet) {
+        width: 50%;
+        margin: auto;    
+    }
+    // justify-content: center;
     .content {
-        background-color: $stand-first-color;
-        border-radius: 0.7rem;
-        margin: auto;
-        max-width: 40rem;
-        color: white;
-        width: 90%;
-        padding: 2rem;
+        // background-color: $stand-first-color;
+        // border-radius: 0.7rem;
+        // margin: auto;
+        // max-width: 40rem;
+        // color: white;
+        // width: 90%;
+        // padding: 2rem;
 
+        .light {
+            font-weight: 300;
+          }
+    }
+}
+
+.intro {
+    @include mq(tablet) {
+        width: 50%;
+        margin: auto;    
     }
 }

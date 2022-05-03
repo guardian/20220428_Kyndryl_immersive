@@ -98,12 +98,15 @@
     }
     .main-title {
       color: white;
-      background-color: #121212;
+      // background-color: #121212;
       display: inline-block;
       max-width: 940px;
-      padding: 1rem;
+      // padding: 1rem;
       h1 {
         margin: 0;
+      }
+      .light {
+        font-weight: 300;
       }
     }
     .title-block {
