@@ -374,6 +374,11 @@ section.footer {
 
   .audio-desc {
     display: flex;
+    img {
+      border-radius: 22px;
+      margin-left: 1rem;
+      width: 100px;
+    }
   }
   
   .mgrid {
@@ -564,9 +569,9 @@ section.footer {
 
 .intro-body {
   position: relative;
-  //  @include mq(tablet) {
-  //    padding-right: 25%;
-  //  }
+   @include mq(tablet) {
+     padding-right: 25%;
+   }
 }
 
 .attribution {

@@ -2,16 +2,16 @@
 $stand-first-color: var(--brand-primary);
 .standfirst {
     display: flex;
-    @include mq(tablet) {
-        width: 50%;
-        margin: auto;    
-    }
+    // @include mq(tablet) {
+    //     width: 50%;
+    //     margin: auto;    
+    // }
     // justify-content: center;
     .content {
         // background-color: $stand-first-color;
         // border-radius: 0.7rem;
         // margin: auto;
-        // max-width: 40rem;
+        max-width: 40rem;
         // color: white;
         // width: 90%;
         // padding: 2rem;
@@ -22,9 +22,9 @@ $stand-first-color: var(--brand-primary);
     }
 }
 
-.intro {
-    @include mq(tablet) {
-        width: 50%;
-        margin: auto;    
-    }
-}
+// .intro {
+//     @include mq(tablet) {
+//         width: 50%;
+//         margin: auto;    
+//     }
+// }

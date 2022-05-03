@@ -36,14 +36,41 @@ export const TweetList = ({data}) => {
     
     const ref = useRef();
 
+    const [curSlide, setCurSlide] = useState(0);
+    const [slideTot, setSlideTot] = useState(0);
+
     const tweets = () => {
         return data.map((v,i)=><Tweet data={v} />);
     }
 
+    //move to top of list when new data is loaded
+
+    useEffect(()=>{      
+        setSlideTot(data.length);
+        const tot = data.length - 3;
+        let tid = 0;
+        let cur = 1;
+        const tickFn = () => {
+            if (cur >= tot - 1) {
+                cur = 0
+                ref.current.goTo(1);
+            } else {
+                ref.current.slideNext();            
+                cur++;
+            }
+            tid = setTimeout(tickFn, 4000);
+        }
+        ref.current.goTo(0);
+        // tickFn();
+        return ()=>{
+            clearTimeout(tid);
+        }
+    },[data])
+
     const settings = {
         verticalMode: true,
         itemsToShow: 4,
-        enableAutoPlay: true,
+        enableAutoPlay: false,
         showArrows: false,
         pagination: false
 
@@ -57,6 +84,8 @@ export const TweetList = ({data}) => {
         e.preventDefault();
         ref.current.slidePrev();
     }
+
+
     return (
         <div className="tweet-list">
             <button className="btn primary btn-prev" onClick={handlePrev}><IconPrev /></button>
