@@ -56,14 +56,16 @@ export const updateVote = async (docid, option, userId) => {
     const batch = writeBatch(db);
     const ref = doc(db, 'survey', docid);
     const respondentRef = doc(db, 'respondent', userId);
-    // if (!(await getDoc(respondentRef)).exists() {
-    //     batch.doc(db,'respondents', userId);
-    // }
+
+    if (!(await getDoc(respondentRef)).exists()) {
+        batch.set(respondentRef,{completedPolls: arrayUnion(docid)});
+    } else {
+        batch.update(respondentRef,{completedPolls: arrayUnion(docid)});
+    }
     // await updateDoc(ref, {option1: increment(1)})
     batch.update(ref, {[option]: increment(1)});
     batch.update(ref, {total: increment(1)});
-    batch.update(respondentRef,{completedPolls: arrayUnion(docid)});
-    // batch.update(respondentRef,'completedPolls', {completedPolls: arrayUnion(docid)});
+
     await batch.commit();
 }
 
