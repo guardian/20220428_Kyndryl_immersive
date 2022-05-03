@@ -14,7 +14,7 @@ const BubbleChart = ({data, onSelect, showChildren = false}) => {
         const root = am5.Root.new("chart");
         console.log('bubble chart')
         
-        const dispatch = useDispatch();
+        // const dispatch = useDispatch();
 
         root.setThemes([
             am5animated.new(root)

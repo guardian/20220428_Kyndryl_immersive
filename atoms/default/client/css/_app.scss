@@ -162,6 +162,9 @@ p {
   padding: 2rem 0;
   
 }
+.content {
+  color: white;
+}
 
 section.footer {
   // background-color: $stand-first-color;
@@ -385,7 +388,7 @@ section.footer {
     >.col {
       padding: 0.5rem;
       @include mq(tablet) {
-        padding: 2rem;
+        padding: .5rem;
       }
     }
     .title {
@@ -438,6 +441,7 @@ section.footer {
         border-radius: 20px;
         font-size: 18/16 + rem;
         transition: transform 200ms ease-out;
+        margin: 1rem 0;
         &:hover {
           transform: scale(1.05);
         }
@@ -486,6 +490,9 @@ section.footer {
 
   .tweet {
     display: flex;
+    padding: 0;
+    margin: 0;
+    border: none;
     img {
       height: 100%;
     }
@@ -500,10 +507,11 @@ section.footer {
   .tweet-list {
     .btn-prev, .btn-next {
       float: right;
-      margin-right: 1rem;      
+      margin-right: 1rem;
     }
     .btn-prev {
       margin-top: -1.8rem;
+      margin-bottom: 1rem;
     }
     .btn-next {
       svg {
