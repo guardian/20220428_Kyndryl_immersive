@@ -374,10 +374,12 @@ section.footer {
 
   .audio-desc {
     display: flex;
+    justify-content: space-between;
     img {
       border-radius: 22px;
       margin-left: 1rem;
       width: 100px;
+      height: 100px;
     }
   }
   
