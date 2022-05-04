@@ -7,16 +7,16 @@ import useAuth from "./useAuth";
 
 const getOptionKey = (option) => option.toLowerCase().trim().replace(/\W/ig,'');
 
-const PollBar = ({id, size, label, total}) => {
+const PollBar = ({id, size, label}) => {
 
     useLayoutEffect(()=>{
-        gsap.set(`#${id}`, {width: (size?.[id]/size?.total)* 100+'%'});
+        gsap.set(`#${id}`, {width: (size?.[id]/size?.leader)* 100+'%'});
     },[size]);
 
     return <div className="bar-container">
         <div className="bar">
             <div className="option-bar" id={id}></div>
-            <div className="value">{size?.[id] || 0}</div>
+            <div className="value">{Math.round((size?.[id]/size?.total)* 100 || 0)}%</div>
         </div>
         <p>{label}</p>
 
@@ -27,6 +27,7 @@ const PollResult = ({docid, options}) => {
 
     const [votes, setVotes] = useState({})
     const [total, setTotal] = useState(0);
+    const [leader, setLeader] = useState(0);
     const [results, setResults] = useState(null);
 
     const ops = (res) => {
@@ -37,27 +38,17 @@ const PollResult = ({docid, options}) => {
                 s[id] = 0;
                 return s;
             })
-            return <PollBar id={id} size={results} label={v} total={total}/>
+            return <PollBar id={id} size={results} label={v} />
         })
     };
 
     useEffect(()=>{
         return watchPoll(docid, (results)=>{
-            // console.log('results', results);
-            // setTotal(results.total);
             let tot = 0;
             for (let v in results) {
                 tot = v != 'total' && results[v] > tot ? results[v] : tot;
-            //     // gsap.set(`#${v}`, {scaleX: (results[v]/results.total)});
-                
-            //     setVotes(s=>{
-            //         s[getOptionKey(v)] = (results[v]/results.total);
-            //         return s;
-            //     });
-            //     console.log(votes);
-            }
-            
-            setResults({...results, total: tot});
+            }   
+            setResults({...results, leader: tot});
         });
     },[]);
 

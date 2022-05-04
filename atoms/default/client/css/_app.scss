@@ -87,22 +87,23 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-weight: 800;
+  font-weight: 300;
   font-size: 52/16 + rem;
 }
 
 h2 {
-  font-weight: 800;
+  font-weight: 300;
   font-size: 36/16 + rem;
 }
 
 h3 {
   font-size: 28/16 + rem;
-  font-weight: bold;
+  font-weight: 300;
 }
 
 h4 {
   font-size: 20/16 + rem;
+  font-weight: 300;
 }
 
 q {
@@ -144,6 +145,7 @@ p {
   // background-color: #B9B9B9;
   background-color:transparent;
   color: white;
+  font-family: "serif";
 }
 
 .scroll-icon {
@@ -203,6 +205,7 @@ section.footer {
   a {
     font-size: .8em;
     color: currentColor;
+    text-decoration: underline;
   }
 }
 
@@ -282,6 +285,7 @@ section.footer {
     }
   }
 #Glabs {
+  position: relative;
   // background: var(--bgColor);
   color: white;
   // background: linear-gradient(219deg, #d31b39 19%, #284061 100%);
@@ -301,7 +305,7 @@ section.footer {
 .btn-start {
   padding: 1rem;
   border-radius: 27px;  
-  background-color: #E4F4F1;
+  background-color: #4CDD84;
   margin: 3rem 0;
   display: inline-block;
   .icon {
@@ -319,6 +323,23 @@ section.footer {
     margin-right: 1rem;
   }
 }
+
+.landing {
+  position: relative;
+  .body {
+    margin: auto;
+    max-width: 34rem;
+  }
+}
+.landing-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+  mix-blend-mode: color-dodge;  
+}
 .chart-container {
   
   #chart {
@@ -326,10 +347,14 @@ section.footer {
     background: url("<%= path %>/radial.png") no-repeat 50%/cover;
 
     @include mq(desktop) {
-      background-size: 60%;      
+      background-size: contain;      
     }
   }
   
+}
+
+.o-zero {
+  opacity: 0;
 }
 .dash {
   #chart {
@@ -353,7 +378,8 @@ section.footer {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 2rem;
+    padding: 2rem 2rem;
+    pointer-events: none;
   }
   .line {
     height: 1px;
@@ -466,6 +492,7 @@ section.footer {
       display: flex;
       justify-content: left;
       align-items: center;
+      margin-right: 1rem;
 
       .value {
         display: flex;

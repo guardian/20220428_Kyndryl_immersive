@@ -178,7 +178,7 @@ const TopBar = () => {
 
             <div className="top-bar">
                 <nav>
-                    {UI.view == 'dash1' && <a href="#" onClick={handleBack} className="btn btn-back"><span className="icon">‹</span> Back</a>}
+                    {UI.view != 'home' && <a href="#" onClick={handleBack} className="btn btn-back"><span className="icon">‹</span> Back</a>}
                 </nav>
                 <div className="icon-bubbles"><img src={`${assetsPath}/topicon.svg`} /></div>
                 <div className="line"></div> 
@@ -190,14 +190,28 @@ const TopBar = () => {
 const Break = () => <div className="break"><span></span><span></span><span></span></div>;
 
 const Landing = ({content}) => {
+    const dispatch = useDispatch();
 
+    const handleStart = e => {
+        e.preventDefault();
+        dispatch(setView('chart'));
+    }
 
     return (
-        <div className="intro-body">
-            <Standfirst content={content}></Standfirst>
-            <Attribution content={content}/>
-            <Intro content={content}></Intro>
+        <div className="landing">
+            <video className="landing-bg" src={`${assetsPath}/bg.mp4`} playsinline autoplay muted loop></video>
 
+            <div className="body">
+                <div className="flex justify-center">
+                    <img src={`${assetsPath}/australia-pulse.svg`} />
+
+                </div>
+                <h1>{content.headline}<br/><span className="light">{content.standfirst}</span></h1>
+                <Attribution content={content}/>
+                <div className="content" dangerouslySetInnerHTML={setHtml(content.intro)}></div>
+                <a href="#" onClick={handleStart} className="btn btn-start">{content.startButtonlabel} <span className="icon">›</span></a>
+
+            </div>
         </div>
     )
 }
@@ -212,8 +226,12 @@ const Chart = ({data, content}) => {
 
     }
 
+    useLayoutEffect(()=>{
+        gsap.set('#Glabs', {backgroundImage: 'none'});
+    },[]);
+
     return (
-        <div className="chart-container">
+        <div className="chart-container o-zero">
             <div className="intro-body">
                 <Standfirst content={content}></Standfirst>
                 <Attribution content={content}/>
@@ -248,8 +266,8 @@ const Dash = ({content, UI}) => {
 
     }
     return (
-    <section className="content-main dash" ref={ref}>
-        <BubbleChart data={content.themes.chartData} onSelect={handleThemeSelect}  showChildren={true} />
+    <section className="content-main dash o-zero" ref={ref}>
+        <BubbleChart data={content.themes.chartData} onSelect={handleThemeSelect} />
         <div className="mgrid">
             <div className="col">
                 <div className="title">
@@ -266,16 +284,19 @@ const Dash = ({content, UI}) => {
             <div className="col">
                 <h3>{content.themePollTitle}</h3>
                 <Polls data={content.polls}/>
+                {data.audio.map(v => <div>
                 <div className="audio-desc">
                     <div className="col">
                         <h4>{content.themeAudioTitle}</h4>
-                        <p dangerouslySetInnerHTML={setHtml(data.audioInfo)} />
+                        <p dangerouslySetInnerHTML={setHtml(v.info)} />
                     </div>
-                    <img src={`${assetsPath}/${data.audioImage}`} alt="" />
+                    <img src={`${assetsPath}/${v.img}`} alt="" />
                 </div>
                 <PillBox>
-                    <AudioPlayer src={`${assetsPath}/${data.audio}.m4a`} />
+                    <AudioPlayer src={`${assetsPath}/${v.src}`} />
                 </PillBox>
+                </div>
+                )}
             </div>
             <div className="col">
                 <h3>{content.themeTwitterTitle}</h3>
@@ -289,18 +310,18 @@ const Dash = ({content, UI}) => {
 
 
 const Home = ({store, content, UI}) => {
-    console.log(UI.view);
+    // console.log(UI.view);
     return (
-        <div>
+        <div className=''>
             <TopBar />
             
                 <Container>
                     <SwitchTransition>
                         <Transition
                             key={UI.view}
-                            timeout={1000}
-                            onEnter={n=>gsap.from(n,{alpha: 0})}
-                            onExit={n=>gsap.to(n,{alpha:0})}
+                            timeout={500}
+                            onEnter={n=>gsap.to(n,{alpha: 1, duration: 0.4})}
+                            onExit={n=>gsap.to(n,{alpha:0, duration: 0.4})}
                             mountOnEnter
                             unmountOnExit
                             appear={true}
@@ -343,7 +364,7 @@ const Main = () => {
    
     // if (!loaded) return <Loading />;
  
-    fireDb.then( data => console.log(data))
+    // fireDb.then( data => console.log(data))
 
 
    
@@ -354,9 +375,9 @@ const Main = () => {
             <SwitchTransition>
                 <Transition
                     key={loaded}
-                    timeout={1000}
-                    onEnter={n=>gsap.from(n,{alpha: 0})}
-                    onExit={n=>gsap.to(n,{alpha:0})}
+                    timeout={500}
+                    // onEnter={n=>gsap.to(n,{alpha: 1})}
+                    onExit={n=>gsap.to(n,{alpha:0, duration: 0.4})}
                     mountOnEnter
                     unmountOnExit
                     appear={true}

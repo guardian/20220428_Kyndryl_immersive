@@ -97,17 +97,6 @@ export const TweetList = ({data}) => {
     }
 
 
-    // useEffect(()=>{      
-    //     let tid = 0;
-    //     const tickFn = () => {
-    //         tid = setTimeout(handleNext, 4000);
-    //     }
-    //     tickFn();
-    //     return ()=>{
-    //         clearTimeout(tid);
-    //     }
-    // },[data]);
-
     return (
         <div className="tweet-list">
             <button className="btn primary btn-prev" onClick={handlePrev}><IconPrev /></button>

@@ -6,8 +6,8 @@ const initialState = {
     sheets: null,
     content: {},
     UI: {
-        view: 'home',
-        theme: null
+        view: 'dash',
+        theme: 'energy'
     }
 };
 
@@ -74,6 +74,7 @@ const rootReducer = (state = initialState, action) => {
             action.payload.themes.forEach(v => {
                 content.themes[v.key] = v;
                 content.themes[v.key].tweets = [];
+                content.themes[v.key].audio = [];
                 content.themes.chartData.children.push({
                     key: v.key,
                     name: v.label,
@@ -91,20 +92,23 @@ const rootReducer = (state = initialState, action) => {
                     })
                 })
                 
-                if (action.payload?.[`theme_${v.key}`]) {
-                    action.payload?.[`theme_${v.key}`].forEach(h => {
-                    content.themes[v.key][h.key] = h.content                   
-                    })
-                }
+                // if (action.payload?.[`theme_${v.key}`]) {
+                //     action.payload?.[`theme_${v.key}`].forEach(h => {
+                //     content.themes[v.key][h.key] = h.content                   
+                //     })
+                // }
             })
 
             action.payload.tweets.forEach(v => {
                 content.themes[v.key].tweets.push(v);
             });
+            action.payload.audio.forEach(v => {
+                content.themes[v.key].audio.push(v);
+            });
 
 
 
-            console.log(content);
+            // console.log(content);
             return {...state, sheets: action.payload, content: content };
             // return {...state, sheets: action.payload };
 

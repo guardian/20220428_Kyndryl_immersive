@@ -1,34 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg width="51px" height="52px" viewbox="0 0 51 52" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <path d="M14.069 28.1379C21.839 28.1379 28.1379 21.839 28.1379 14.069C28.1379 6.29889 21.839 0 14.069 0C6.29889 0 0 6.29889 0 14.069C0 21.839 6.29889 28.1379 14.069 28.1379Z" transform="translate(0.41379312 0.38709676)" id="path_1" />
-    <path d="M10.7586 20.6897C16.7004 20.6897 21.5172 16.0581 21.5172 10.3448C21.5172 4.63154 16.7004 0 10.7586 0C4.8168 0 0 4.63154 0 10.3448C0 16.0581 4.8168 20.6897 10.7586 20.6897Z" transform="translate(29.068966 15.456062)" id="path_2" />
-    <path d="M10.7586 20.6897C16.7004 20.6897 21.5172 16.0581 21.5172 10.3448C21.5172 4.63154 16.7004 0 10.7586 0C4.8168 0 0 4.63154 0 10.3448C0 16.0581 4.8168 20.6897 10.7586 20.6897Z" transform="translate(10.5172415 31.1802)" id="path_3" />
-    <clipPath id="clip_1">
-      <use xlink:href="#path_1" />
-    </clipPath>
-    <clipPath id="clip_2">
-      <use xlink:href="#path_2" />
-    </clipPath>
-    <clipPath id="clip_3">
-      <use xlink:href="#path_3" />
-    </clipPath>
-  </defs>
-  <g id="Group-3">
-    <g id="Oval">
-      <g clip-path="url(#clip_1)">
-        <use xlink:href="#path_1" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="53px" viewBox="0 0 52 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Sub-001" transform="translate(-690.000000, -40.000000)">
+            <g id="Icon" transform="translate(690.500000, 40.532258)">
+                <circle id="Oval" fill="#FF462D" cx="14.4827586" cy="14.4560623" r="14.0689655"></circle>
+                <ellipse id="Oval-Copy" fill="#FFAC00" cx="39.8275862" cy="25.8008899" rx="10.7586207" ry="10.3448276"></ellipse>
+                <ellipse id="Oval-Copy-2" fill="#874DD9" cx="21.2758621" cy="41.5250278" rx="10.7586207" ry="10.3448276"></ellipse>
+            </g>
+        </g>
     </g>
-    <g id="Oval-Copy">
-      <g clip-path="url(#clip_2)">
-        <use xlink:href="#path_2" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      </g>
-    </g>
-    <g id="Oval-Copy-2">
-      <g clip-path="url(#clip_3)">
-        <use xlink:href="#path_3" fill="none" stroke="#FFFFFF" stroke-width="2" />
-      </g>
-    </g>
-  </g>
 </svg>
