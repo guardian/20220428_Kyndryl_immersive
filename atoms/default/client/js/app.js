@@ -257,7 +257,8 @@ const Dash = ({content, UI}) => {
 
     useLayoutEffect(()=>{
         if (!ref.current) return;
-        ref.current.style.setProperty('--bgHilight', data.color);
+        // ref.current.style.setProperty('--bgHilight', data.color);
+        document.querySelector('#Glabs').style.setProperty('--bgHilight', data.color);
         gsap.set('#Glabs', {backgroundImage: `linear-gradient(${data.background})`});
     },[UI.theme]);
 
