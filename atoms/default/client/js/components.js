@@ -1,9 +1,11 @@
-import gsap from "gsap/gsap-core";
+import gsap from "gsap";
 import {h, Component, options, Fragment} from "preact";
 import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 import { assetsPath } from "./store";
 import { IconPrev } from "./Icons";
 import Carousel from 'react-elastic-carousel';
+import {Transition, TransitionGroup} from "react-transition-group";
+
 
 
 const setHtml = (html) => ({__html: html});
@@ -18,54 +20,55 @@ export const PillBox = (props) => {
 }
 
 const Tweet = ({data}) => {
+    const ref = useRef();
+    // const ref2 = useRef();
+    useLayoutEffect(()=>{
+        gsap.set(ref.current, {height: 0})
+        // gsap.to(ref.current, {margin: 0, duration: 1})
+        gsap.delayedCall(.2,()=>{
+            gsap.to(ref.current, {height:ref.current.querySelector('.pillbox').clientHeight, duration: 0.5})
+            gsap.set(ref.current, {height: 'auto', delay: 0.8});
+        });
+    },[])
     return (
-        <PillBox>
-            <a className="tweet" href={data.link} target="_blank" rel="no-follow">
-                <img src={`${assetsPath}/avatar.png`} />
-                <div>
-                    <p>{data.label}</p>
-                    <p className="handle">{data.handle}</p>
-                    <p dangerouslySetInnerHTML={setHtml(data.content)}></p>
-                </div>
-            </a>
-        </PillBox>
+            <div className="tweetbox" ref={ref}>
+                <PillBox className="">
+                <a className="tweet" href={data.link} target="_blank" rel="no-follow">
+                        <img src={`${assetsPath}/avatar.png`} />
+                        <div>
+                            <p>{data.label}</p>
+                            <p className="handle">{data.handle}</p>
+                            <p dangerouslySetInnerHTML={setHtml(data.content)}></p>
+                        </div>
+                    </a>
+                </PillBox>
+            </div>
     )
 }
 
 export const TweetList = ({data}) => {
-    
+
     const ref = useRef();
+    const dk = data.map((v, i) => {
+        v.key = `tweet${i}`;
+        return v;
+    });
+    // const dk = [...items];
+    const [curList, setCurList] = useState([]);
+    // const [curList, setCurList] = useState([...data]);
+    const [reserve, setReserve] = useState([]);
 
-    const [curSlide, setCurSlide] = useState(0);
-    const [slideTot, setSlideTot] = useState(0);
-
+    // console.log('>>tweets', curList, data)
     const tweets = () => {
-        return data.map((v,i)=><Tweet data={v} />);
+        return curList.map((v,i)=><Tweet data={v} key={i} />);
     }
 
+    useEffect(()=>{
+        setCurList([...dk.slice(0,4)]);
+        setReserve([...dk.slice(4)]);
+    },data)
     //move to top of list when new data is loaded
 
-    useEffect(()=>{      
-        setSlideTot(data.length);
-        const tot = data.length - 3;
-        let tid = 0;
-        let cur = 1;
-        const tickFn = () => {
-            if (cur >= tot - 1) {
-                cur = 0
-                ref.current.goTo(1);
-            } else {
-                ref.current.slideNext();            
-                cur++;
-            }
-            tid = setTimeout(tickFn, 4000);
-        }
-        ref.current.goTo(0);
-        // tickFn();
-        return ()=>{
-            clearTimeout(tid);
-        }
-    },[data])
 
     const settings = {
         verticalMode: true,
@@ -76,22 +79,63 @@ export const TweetList = ({data}) => {
 
     }
 
-    const handleNext = (e) => {
-        e.preventDefault();
-        ref.current.slideNext();
+    const handleNext = () => {
+        // e.preventDefault();
+        const cl = [...curList.slice(1), reserve[0]];
+        const rl = [...reserve.slice(1), curList[0]];
+        console.log(cl, rl);
+        setCurList([...cl]);
+        setReserve([...rl])
     }
     const handlePrev = (e) => {
         e.preventDefault();
-        ref.current.slidePrev();
+        const cl = [...reserve.slice(-1), ...curList.slice(0, -1)];
+        const rl = [...curList.slice(-1), ...reserve.slice(0, -1)];
+        
+        setCurList((s) => [...cl]);
+        setReserve(s=>[...rl])
     }
 
+
+    // useEffect(()=>{      
+    //     let tid = 0;
+    //     const tickFn = () => {
+    //         tid = setTimeout(handleNext, 4000);
+    //     }
+    //     tickFn();
+    //     return ()=>{
+    //         clearTimeout(tid);
+    //     }
+    // },[data]);
 
     return (
         <div className="tweet-list">
             <button className="btn primary btn-prev" onClick={handlePrev}><IconPrev /></button>
-            <Carousel ref={ref} {...settings}>
-            {tweets()}
-            </Carousel>
+            <div className="clear-float"></div>
+            <TransitionGroup>
+            {curList.map((v) => {
+                return (
+                <Transition key={v.key}
+                timeout={1000}
+                onEnter={(n, appear) => {
+                    if (!appear) {
+                        gsap.to(n,{alpha: 1, duration: 0.5})
+                        // gsap.delayedCall(0,()=>gsap.from(n,{height: 0, duration:0.5}))
+                        // gsap.delayedCall(0, ()=>gsap.fromTo(n,{height: 0},{height: n.clientHeight, duration:0.5}))
+                        // gsap.to(n,{height: 'auto', duration: 0.5, delay: 0.5})
+                        // gsap.set(n,{className:'pillbox tweetbox', delay: 0.5})
+                    }
+                }}
+                onExit={n=>gsap.to(n,{height: 0, alpha:0, duration: 0.5,padding: 0, margin: 0})}
+                mountOnEnter
+                unmountOnExit
+                // appear={true}
+                >
+                    <Tweet data={v} />
+                </Transition>
+                );
+            })}
+            </TransitionGroup>
             <button className="btn primary btn-next" onClick={handleNext}><IconPrev /></button>
         </div>
     )

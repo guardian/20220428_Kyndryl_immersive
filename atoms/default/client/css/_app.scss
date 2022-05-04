@@ -512,7 +512,7 @@ section.footer {
   .tweet-list {
     .btn-prev, .btn-next {
       float: right;
-      margin-right: 1rem;
+      // margin-right: 1rem;
     }
     .btn-prev {
       margin-top: -1.8rem;
@@ -523,6 +523,24 @@ section.footer {
         transform: rotate(180deg);
       }
     }
+    .tweetbox {
+      opacity: 0;
+      height: auto;
+      transition: height 0.3s ease;
+      transform-origin: 50% 0;
+      overflow: hidden;
+      // margin-bottom: 1rem;
+      .pillbox {
+        margin-top: 0;
+      }
+      &.entering {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+  .clear-float {
+    clear: both;
   }
   .related-items {
     margin-top: 2rem;
