@@ -34,7 +34,7 @@ const Tweet = ({data}) => {
     return (
             <div className="tweetbox" ref={ref}>
                 <PillBox className="">
-                <a className="tweet" href={data.link} target="_blank" rel="no-follow">
+                <a className="tweet-item" href={data.link} target="_blank" rel="no-follow">
                         <img src={`${assetsPath}/avatar.png`} />
                         <div>
                             <p>{data.label}</p>
