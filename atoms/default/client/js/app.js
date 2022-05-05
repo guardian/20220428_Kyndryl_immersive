@@ -212,7 +212,7 @@ const Landing = ({data, content}) => {
 
     return (
         <div className="landing">
-            <video className="landing-bg" src={`${assetsPath}/bg.mp4`} playsinline autoplay muted loop></video>
+            <video className="landing-bg" src={`${assetsPath}/${content.bgVideo}`} playsinline autoplay muted loop></video>
             { content.showColorBg && 
                 <div className="radial-bg o-zero">
                     <AnimatedBg />
