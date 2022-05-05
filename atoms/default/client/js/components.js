@@ -26,6 +26,7 @@ const Tweet = ({data}) => {
         gsap.set(ref.current, {height: 0})
         // gsap.to(ref.current, {margin: 0, duration: 1})
         gsap.delayedCall(.2,()=>{
+            if (!ref.current) return;
             gsap.to(ref.current, {height:ref.current.querySelector('.pillbox').clientHeight, duration: 0.5})
             gsap.set(ref.current, {height: 'auto', delay: 0.8});
         });
