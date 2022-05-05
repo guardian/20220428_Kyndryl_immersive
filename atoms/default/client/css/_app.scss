@@ -63,10 +63,11 @@ body {
 // }
 p {
   line-height: 1.2;
+  font-weight: 300;
 }
 p a {
   text-decoration: underline;
-  font-weight: normal;
+  font-weight: 300;
   font-size: 1em;
 }
 h1, h2, h3, h4 {
@@ -145,7 +146,8 @@ p {
   // background-color: #B9B9B9;
   background-color:transparent;
   color: white;
-  // font-family: "serif";
+  font-family: "Guardian Egyptian Web", "sans-serif";
+  font-weight: 300;
 }
 
 .scroll-icon {
@@ -522,7 +524,7 @@ section.footer {
 
   }
 
-  .tweet {
+  .tweet-item {
     display: flex;
     padding: 0;
     margin: 0;
