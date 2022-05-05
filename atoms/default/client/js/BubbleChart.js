@@ -37,7 +37,7 @@ const BubbleChart = ({data, onSelect, showChildren = false}) => {
             idField: "name",
             linkWithField: "linkWith",
             manyBodyStrength: -10,
-            centerStrength: 0.8,
+            centerStrength: 0.4,
             // toggleKey: "none",
             minRadius: am5.percent(8),
             maxRadius: am5.percent(16),
@@ -45,7 +45,7 @@ const BubbleChart = ({data, onSelect, showChildren = false}) => {
             velocityDecay: 0.6,
           }));
           series.nodes.template.events.on("click", function(e) {
-            console.log(e.target._dataItem.dataContext.key)
+            // console.log(e.target._dataItem.dataContext.key)
             if (e.target._dataItem.dataContext.isChild) return;
             // dispatch( setTheme(e.target._dataItem.dataContext.key));
             onSelect( (e.target._dataItem.dataContext.key));
@@ -54,7 +54,18 @@ const BubbleChart = ({data, onSelect, showChildren = false}) => {
           series.get("colors").setAll({
             step: 2
           });
-          series.hideTooltip(true)
+        //   https://www.amcharts.com/docs/v5/charts/hierarchy/force-directed/#Label_content
+          series.labels.template.setAll({
+            // text: "{name}\n[bold]{value}[/]",
+            fontFamily: "Display Sans",
+            fontSize: 20
+          });          
+        //   series.tooltip.template.forceHidden = (true);
+        // https://www.amcharts.com/demos/force-directed-adding-links/
+        series.nodes.template.setAll({
+            tooltipText: null,
+            // cursorOverStyle: "pointer"
+          });
         // series.get("colors").set("colors", [
         //     am5.color(0x095256),
         //     am5.color(0x087f8c),

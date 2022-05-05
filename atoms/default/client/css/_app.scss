@@ -371,7 +371,7 @@ section.footer {
   text-align: center;
   position: relative;
   nav {
-    text-align-last: left;
+    text-align: left;
   }
   .icon-bubbles {
     position: absolute;
@@ -390,7 +390,7 @@ section.footer {
   }
 }
 .pillbox {
-    background-color: var(--pillboxBg, #fff);
+    background-color: var(--pillboxBg, #E6F2F1EE);
     border-radius: 25px;
     padding: 1rem;
     margin: 1rem 0;
@@ -534,6 +534,7 @@ section.footer {
     }
     .handle {
       color: var(--bgHilight);
+      font-weight: 500;
     }
     p {
       margin: 0 0 0 1rem;
