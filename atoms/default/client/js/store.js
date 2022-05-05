@@ -6,7 +6,7 @@ const initialState = {
     sheets: null,
     content: {},
     UI: {
-        view: 'dash',
+        view: 'home',
         theme: 'energy'
     }
 };
@@ -53,7 +53,9 @@ const rootReducer = (state = initialState, action) => {
         case ACTION_SET_SHEETS:
             const content = {};
             action.payload.global.forEach(v => {
-                content[v.key] = v.content;
+                content[v.key] = ' TRUE FALSE'.indexOf(v.content) > 0 ? 
+                                    (v.content === 'TRUE' ? true : false)
+                                    : v.content;
             });
 
             content['polls'] = [];

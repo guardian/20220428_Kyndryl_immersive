@@ -9,7 +9,7 @@ import RelatedContent from "shared/js/RelatedContent";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import store, { ACTION_SET_SECTIONS, fetchData, assetsPath, ACTION_SET_VIEW, ACTION_SET_SCORE, setView, setTheme } from "./store";
-import {IconNext, Logo, IconHand} from "./Icons";
+import {IconNext, Logo, IconHand, IconRadial} from "./Icons";
 import {SwitchTransition, Transition, TransitionGroup} from "react-transition-group";
 import {Provider, useSelector, useDispatch} from "react-redux";
 import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
@@ -17,7 +17,7 @@ import { fireDb } from "./firebase";
 import BubbleChart from "./BubbleChart";
 import Polls from "./Poll";
 import AudioPlayer from 'shared/js/AudioPlayer';
-import { PillBox, TweetList } from "./components";
+import { AnimatedBg, PillBox, TweetList } from "./components";
 import {CircleBg} from "./Icons";
 import { iOS } from "@amcharts/amcharts5/.internal/core/util/Utils";
 
@@ -166,9 +166,9 @@ const TopBar = () => {
     const handleBack = e => {
         e.preventDefault();
         switch (UI.view) {
-            case 'dash':
-                dispatch({type:ACTION_SET_VIEW, payload: 'chart'});
-                break;
+            // case 'dash':
+            //     dispatch({type:ACTION_SET_VIEW, payload: 'chart'});
+            //     break;
             default:
                 dispatch({type:ACTION_SET_VIEW, payload: 'home'});
         }
@@ -189,8 +189,21 @@ const TopBar = () => {
 
 const Break = () => <div className="break"><span></span><span></span><span></span></div>;
 
-const Landing = ({content}) => {
+const Landing = ({data, content}) => {
     const dispatch = useDispatch();
+
+    const handleThemeSelect = key => {
+        dispatch( setTheme(key));
+        dispatch( setView('dash'));
+
+    }
+
+    useLayoutEffect(()=>{
+        gsap.set('#Glabs', {backgroundImage: 'none'});
+        gsap.to('.rad', {scale: 1.2, yoyo: true, repeat: -1, duration: 3, ease: 'cubic.inOut'});
+        gsap.to('.radial-bg', {alpha: 1});
+    },[]);
+
 
     const handleStart = e => {
         e.preventDefault();
@@ -200,18 +213,28 @@ const Landing = ({content}) => {
     return (
         <div className="landing">
             <video className="landing-bg" src={`${assetsPath}/bg.mp4`} playsinline autoplay muted loop></video>
-
-            <div className="body">
-                <div className="flex justify-center">
-                    <img src={`${assetsPath}/australia-pulse.svg`} />
-
+            { content.showColorBg && 
+                <div className="radial-bg o-zero">
+                    <AnimatedBg />
                 </div>
+            }
+            <div className="body">
                 <h1>{content.headline}<br/><span className="light">{content.standfirst}</span></h1>
                 <Attribution content={content}/>
                 <div className="content" dangerouslySetInnerHTML={setHtml(content.intro)}></div>
-                <a href="#" onClick={handleStart} className="btn btn-start">{content.startButtonlabel} <span className="icon">›</span></a>
+                {/* <a href="#" onClick={handleStart} className="btn btn-start">{content.startButtonlabel} <span className="icon">›</span></a> */}
+                <div className="prompt pt-10">
+                    <IconHand /> Tap a topic to join the conversation
+                </div>
 
             </div>
+                <div className="chart-wrap">
+                    <div className="flex justify-center absolute rad"></div>
+                    <BubbleChart data={data} onSelect={handleThemeSelect} />
+                </div>
+                <div className="body pb-10">
+                    <div className="content" dangerouslySetInnerHTML={setHtml(content.intro2)}></div>
+                </div>
         </div>
     )
 }
@@ -327,7 +350,7 @@ const Home = ({store, content, UI}) => {
                             unmountOnExit
                             appear={true}
                         >
-                            {UI.view === 'home' && <Landing content={content} />}
+                            {UI.view === 'home' && <Landing data={content.themes.chartData} content={content} />}
                             {UI.view === 'chart' && <Chart data={content.themes.chartData} content={content}/>}
                             {UI.view === 'dash' && <Dash content={content} UI={UI} />}
                         </Transition>            
