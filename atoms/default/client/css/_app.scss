@@ -286,8 +286,12 @@ section.footer {
       max-width: 84rem;
     }
   }
+  main {
+    background-color: #1e2e3f;
+  }
 #Glabs {
   position: relative;
+  background-color: #1e2e3f;
   // background: var(--bgColor);
   color: white;
   // background: linear-gradient(219deg, #d31b39 19%, #284061 100%);
@@ -358,7 +362,8 @@ section.footer {
     position: relative;
   }
   #chart {
-    height: 60vh;
+    height: 70vh;
+    min-height: 500px;
   }
   .rad {
     width: 100%;
