@@ -84,6 +84,18 @@ const Attribution = ({content}) => {
     )
 }
 
+const AttributionHorizontal = ({content}) => {
+    return (
+        <div className="attribution-horizontal">
+            <p>Paid for by</p>
+            <a className="mt-4 block" href={content.logoLink} target="_blank">
+                <Logo />
+            </a>
+            <div className="about-content" dangerouslySetInnerHTML={setHtml(content.aboutLink)} />
+        </div>
+    )
+}
+
 
 const Header = () => {
     const content = useSelector(s=>s.content);
@@ -158,7 +170,7 @@ const Intro = ({content}) => {
     )
 }
 
-const TopBar = () => {
+const TopBar = ({content}) => {
 
     const UI = useSelector(s=>s.UI);
     const dispatch = useDispatch();
@@ -176,12 +188,15 @@ const TopBar = () => {
     return (
         <Container>
 
-            <div className="top-bar">
-                <nav>
-                    {UI.view != 'home' && <a href="#" onClick={handleBack} className="btn btn-back"><span className="icon">‹</span> Back</a>}
+            <div className={`top-bar view-${UI.view}`}>
+                {UI.view != 'home' && <nav>
+                    <a href="#" onClick={handleBack} className="btn btn-back"><span className="icon">‹</span> Back</a>
+                    <div><h4>{content.title}</h4></div>
                 </nav>
+                }
                 <div className="icon-bubbles"><img src={`${assetsPath}/topicon.svg`} /></div>
                 <div className="line"></div> 
+                {UI.view != 'home' && <AttributionHorizontal content={content} />}
             </div>
         </Container>
     )
@@ -219,6 +234,7 @@ const Landing = ({data, content}) => {
                 </div>
             }
             <div className="body">
+                <div className="strap">{content.strap}</div>
                 <h1>{content.headline}<br/><span className="light">{content.standfirst}</span></h1>
                 <Attribution content={content}/>
                 <div className="content" dangerouslySetInnerHTML={setHtml(content.intro)}></div>
@@ -269,7 +285,7 @@ const Chart = ({data, content}) => {
 
 
 const Dash = ({content, UI}) => {
-    console.log('mgrid', UI)
+    // console.log('mgrid', UI)
     const data = content.themes?.[UI.theme];
     
     if (!data) return;
@@ -337,7 +353,7 @@ const Home = ({store, content, UI}) => {
     // console.log(UI.view);
     return (
         <div className=''>
-            <TopBar />
+            <TopBar content={content} />
             
                 <Container>
                     <SwitchTransition>

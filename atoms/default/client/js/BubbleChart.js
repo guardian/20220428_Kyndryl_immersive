@@ -78,13 +78,15 @@ const BubbleChart = ({data, onSelect, showChildren = false}) => {
         //       text: '{name}'
         //   })
 
-        // series.circles.template.adapters.add("fill", function(fill, target) {
-        //     // console.log('>>>', target._dataItem.dataContext)
-        //     if (target._dataItem.dataContext.name == "Flora") {
-        //     return am5.color(0xff0000);
-              
-        //     }
-        //   });          
+        series.circles.template.adapters.add("fill", function(fill, target) {
+            // console.log('>>>', target._dataItem.dataContext)
+            if (target._dataItem.dataContext.isChild === false) {
+                return am5.color(parseInt(target._dataItem.dataContext.color.replace('#',''),16));
+            }
+
+            return fill;
+            
+          });          
           series.links.template.set("strength", 0.2);
           
           series.data.setAll([data]);
