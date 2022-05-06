@@ -36,7 +36,9 @@ const Tweet = ({data}) => {
             <div className="tweetbox" ref={ref}>
                 <PillBox className="">
                 <a className="tweet-item" href={data.link} target="_blank" rel="no-follow">
-                        <img src={`${assetsPath}/avatar.png`} />
+                        {/* <img src={`${assetsPath}/avatar.png`} /> */}
+                        <Avatar id={data.handle} size={100} />
+                        {/* <img src={Avatar(data.handle, 100)} /> */}
                         <div>
                             <p>{data.label}</p>
                             <p className="handle">{data.handle}</p>
@@ -164,4 +166,24 @@ export const AnimatedBg = () => {
 	</svg>
     </div>
     )
+}
+
+import Ident from "identicon";
+
+const Avatar = ({id, size = 100}) => {
+    const [buffer, setBuffer] = useState();
+
+    useLayoutEffect(()=>{
+
+        const ident = Ident.generate({id, size},(e,buff)=> {
+            if (!e) {
+                setBuffer(buff);
+            } else {
+                setBuffer(`${assetsPath}/avatar.png`);
+
+            }
+        })
+    },[]);
+
+    return <img class="avatar" src={buffer} />
 }
