@@ -333,7 +333,7 @@ section.footer {
   top: 0;
   left: 0;
   z-index: -1;
-  mix-blend-mode: color-dodge;
+  mix-blend-mode: difference;
 }
 .landing {
   position: relative;

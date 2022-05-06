@@ -49,14 +49,15 @@ const Tweet = ({data}) => {
 }
 
 export class TweetList extends Component {
-    ref = useRef();
+    ref;
     timer = 0;
     autoPlayTimeout = 4000;
 
     componentWillUnmount() {
+        
         this.stopAutoPlay();
     }
-    
+
     componentWillReceiveProps (newProps) {       
         const dk = newProps.data.map((v, i) => {
             v.key = `tweet${i}`;
