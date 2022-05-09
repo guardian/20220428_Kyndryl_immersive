@@ -392,7 +392,8 @@ const Main = () => {
     dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch( fetchData('https://interactive.guim.co.uk/docsdata/14zLIFkepHejjYOhltZdBrorbfvzz6ChdRK99q2-osyw.json') );
+        const qs = Object.fromEntries (new URLSearchParams(location.search).entries());
+        dispatch( fetchData(`https://interactive.guim.co.uk/docsdata/${qs.k? qs.k : '14zLIFkepHejjYOhltZdBrorbfvzz6ChdRK99q2-osyw'}.json`) );
     },[]);
 
 
