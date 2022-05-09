@@ -19,7 +19,7 @@ import Polls from "./Poll";
 import AudioPlayer from 'shared/js/AudioPlayer';
 import { AnimatedBg, PillBox, TweetList } from "./components";
 import {CircleBg} from "./Icons";
-import { iOS } from "@amcharts/amcharts5/.internal/core/util/Utils";
+
 
 let dispatch;
 
@@ -85,10 +85,12 @@ const Attribution = ({content}) => {
 }
 
 const AttributionHorizontal = ({content}) => {
+    const UI = useSelector(s=>s?.UI)
+   
     return (
         <div className="attribution-horizontal">
             <p>Paid for by</p>
-            <a className="mt-4 block" href={content.logoLink} target="_blank">
+            <a className="mt-4 block" href={content.themes[UI?.theme]?.cta} target="_blank">
                 <Logo />
             </a>
             <div className="about-content" dangerouslySetInnerHTML={setHtml(content.aboutLink)} />
