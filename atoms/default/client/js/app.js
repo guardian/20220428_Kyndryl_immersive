@@ -332,10 +332,10 @@ const Dash = ({content, UI}) => {
                         <h4>{content.themeAudioTitle}</h4>
                         <p dangerouslySetInnerHTML={setHtml(v.info)} />
                     </div>
-                    <img src={`${assetsPath}/${v.img}`} alt="" />
+                    <img src={`${content.assetsPath}/${v.img}`} alt="" />
                 </div>
                 <PillBox>
-                    <AudioPlayer src={`${assetsPath}/${v.src}`} />
+                    <AudioPlayer src={`${content.assetsPath}/${v.src}`} />
                 </PillBox>
                 </div>
                 )}
