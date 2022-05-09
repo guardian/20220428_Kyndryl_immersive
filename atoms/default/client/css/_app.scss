@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: #1e2e3f;
+  background-color: #3d3c3d;
   // color: #fff;
 }
 
@@ -287,11 +287,11 @@ section.footer {
     }
   }
   main {
-    background-color: #3d3c3d;
+    background-color: transparent !important;
   }
 #Glabs {
   position: relative;
-  background-color: #3d3c3d;
+  background-color: transparent !important;
   // background: var(--bgColor);
   color: white;
   // background: linear-gradient(219deg, #d31b39 19%, #284061 100%);
