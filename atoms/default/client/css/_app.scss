@@ -462,6 +462,9 @@ section.footer {
 }
   #chart {
     height: 40vh;
+    canvas:nth-child(2) {
+      display: none;
+    }
   }
 
   .audio-desc {
