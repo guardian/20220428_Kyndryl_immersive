@@ -326,7 +326,7 @@ const Dash = ({content, UI}) => {
             <div className="col">
                 <h3>{content.themePollTitle}</h3>
                 <Polls data={content.polls}/>
-                {data.audio.map(v => <div>
+                {data.audio.sort(()=>Math.random() - Math.random()).slice(0,1).map(v => <div>
                 <div className="audio-desc">
                     <div className="col">
                         <h4>{content.themeAudioTitle}</h4>
